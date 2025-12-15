@@ -1,0 +1,455 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Enhanced glassmorphism with subtle violet background */
+    --background: 270 15% 97%;
+    --foreground: 213 27% 14%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 213 27% 14%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 213 27% 14%;
+
+    /* Deep blue primary - sophisticated */
+    --primary: 213 27% 14%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Enhanced pale green secondary */
+    --secondary: 142 65% 50%;
+    --secondary-foreground: 0 0% 100%;
+
+    /* Subtle violet-tinted backgrounds */
+    --muted: 270 12% 95%;
+    --muted-foreground: 213 13% 45%;
+
+    /* Enhanced pale pink accent */
+    --accent: 330 85% 92%;
+    --accent-foreground: 213 27% 14%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Enhanced glassmorphism borders with violet tint */
+    --border: 270 20% 88%;
+    --input: 0 0% 100%;
+    --ring: 213 27% 14%;
+
+    /* New glassmorphism enhancement colors */
+    --glass-tint: 270 30% 98%;
+    --glass-border: 270 25% 85%;
+    --green-pale: 142 45% 85%;
+    --pink-pale: 330 60% 88%;
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Enhanced Glassmorphism utilities - Pushed to the max */
+@layer utilities {
+  .glass {
+    background: linear-gradient(135deg, hsl(var(--glass-tint)) 0%, hsl(var(--glass-tint) / 0.8) 100%);
+    @apply shadow-2xl;
+    border: 1px solid hsl(var(--glass-border) / 0.4);
+    backdrop-filter: blur(24px) saturate(180%);
+  }
+  
+  .glass-card {
+    background: linear-gradient(135deg, hsl(var(--glass-tint) / 0.95) 0%, hsl(var(--glass-tint) / 0.85) 100%);
+    @apply shadow-2xl;
+    border: 1px solid hsl(var(--glass-border) / 0.5);
+    backdrop-filter: blur(32px) saturate(200%);
+    box-shadow: 
+      0 25px 50px -12px hsl(var(--primary) / 0.08),
+      0 0 0 1px hsl(var(--glass-border) / 0.3),
+      inset 0 1px 0 hsl(0 0% 100% / 0.4);
+  }
+  
+  .glass-header {
+    background: linear-gradient(135deg, hsl(var(--glass-tint) / 0.7) 0%, hsl(var(--glass-tint) / 0.5) 100%);
+    border-bottom: 1px solid hsl(var(--glass-border) / 0.3);
+    backdrop-filter: blur(20px) saturate(150%);
+  }
+  
+  .glass-accent-green {
+    background: linear-gradient(135deg, hsl(var(--green-pale)) 0%, hsl(var(--green-pale) / 0.8) 100%);
+    @apply backdrop-blur-xl shadow-lg;
+    border: 1px solid hsl(var(--secondary) / 0.2);
+  }
+  
+  .glass-accent-pink {
+    background: linear-gradient(135deg, hsl(var(--pink-pale)) 0%, hsl(var(--pink-pale) / 0.8) 100%);
+    @apply backdrop-blur-xl shadow-lg;
+    border: 1px solid hsl(var(--accent) / 0.3);
+  }
+  
+  /* Apple-style animations with enhanced glass effects */
+  .apple-hover {
+    @apply transition-all duration-300 ease-out hover:scale-[1.02];
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .apple-hover:hover {
+    box-shadow:
+      0 32px 64px -12px hsl(var(--primary) / 0.12),
+      0 0 0 1px hsl(var(--glass-border) / 0.4),
+      inset 0 1px 0 hsl(0 0% 100% / 0.5);
+    backdrop-filter: blur(40px) saturate(220%);
+  }
+
+  .apple-press {
+    @apply active:scale-[0.98] transition-transform duration-150;
+    transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Fade-in animation for content */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+
+  /* Slide-in from left animation */
+  @keyframes slideInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .animate-slide-in-left {
+    animation: slideInLeft 0.4s ease-out forwards;
+  }
+
+  /* Slide-in from right animation */
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .animate-slide-in-right {
+    animation: slideInRight 0.4s ease-out forwards;
+  }
+
+  /* Scale-in animation for modals */
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.3s ease-out forwards;
+  }
+
+  /* Shimmer loading animation */
+  @keyframes shimmer {
+    0% {
+      background-position: -1000px 0;
+    }
+    100% {
+      background-position: 1000px 0;
+    }
+  }
+
+  .animate-shimmer {
+    background: linear-gradient(
+      to right,
+      hsl(var(--muted)) 0%,
+      hsl(var(--muted-foreground) / 0.1) 50%,
+      hsl(var(--muted)) 100%
+    );
+    background-size: 1000px 100%;
+    animation: shimmer 2s infinite linear;
+  }
+
+  /* Bounce animation for notifications */
+  @keyframes bounce {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-5px);
+    }
+  }
+
+  .animate-bounce-subtle {
+    animation: bounce 0.6s ease-in-out;
+  }
+
+  /* Pulse animation for loading states */
+  @keyframes pulse-slow {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.7;
+    }
+  }
+
+  .animate-pulse-slow {
+    animation: pulse-slow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  /* Staggered list animation */
+  .stagger-item {
+    opacity: 0;
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+
+  .stagger-item:nth-child(1) { animation-delay: 0.05s; }
+  .stagger-item:nth-child(2) { animation-delay: 0.1s; }
+  .stagger-item:nth-child(3) { animation-delay: 0.15s; }
+  .stagger-item:nth-child(4) { animation-delay: 0.2s; }
+  .stagger-item:nth-child(5) { animation-delay: 0.25s; }
+  .stagger-item:nth-child(6) { animation-delay: 0.3s; }
+  .stagger-item:nth-child(7) { animation-delay: 0.35s; }
+  .stagger-item:nth-child(8) { animation-delay: 0.4s; }
+  .stagger-item:nth-child(9) { animation-delay: 0.45s; }
+  .stagger-item:nth-child(10) { animation-delay: 0.5s; }
+
+  /* Smooth transitions for all interactive elements */
+  button, a, input, textarea, select {
+    @apply transition-all duration-200;
+  }
+
+  /* Ripple effect on button click */
+  @keyframes ripple {
+    to {
+      transform: scale(4);
+      opacity: 0;
+    }
+  }
+
+  .ripple-effect {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ripple-effect::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: hsl(var(--primary-foreground) / 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    animation: ripple 0.6s ease-out;
+    pointer-events: none;
+  }
+
+  .ripple-effect:active::after {
+    animation: ripple 0.6s ease-out;
+  }
+
+  /* === STYLE APPLE MODERNE === */
+
+  /* Ombres Apple subtiles */
+  .apple-shadow {
+    box-shadow:
+      0 1px 3px rgba(0, 0, 0, 0.05),
+      0 1px 2px rgba(0, 0, 0, 0.1);
+  }
+
+  .apple-shadow-lg {
+    box-shadow:
+      0 10px 15px -3px rgba(0, 0, 0, 0.05),
+      0 4px 6px -2px rgba(0, 0, 0, 0.03);
+  }
+
+  /* Effet de séparation au hover */
+  .split-on-hover {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .split-on-hover:hover {
+    transform: translateY(-4px);
+    box-shadow:
+      0 12px 24px -8px hsl(142 65% 50% / 0.15),
+      0 0 0 1px rgba(0, 0, 0, 0.05);
+  }
+
+  /* Effet de lift subtil */
+  .lift-hover {
+    transition: all 0.25s ease;
+  }
+
+  .lift-hover:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      0 8px 16px -4px rgba(0, 0, 0, 0.1),
+      0 0 0 1px rgba(0, 0, 0, 0.03);
+  }
+
+  /* Boutons style Apple - Mix rond/carré */
+  .btn-apple-rounded {
+    @apply rounded-full px-6 py-3 font-medium;
+    transition: all 0.2s ease;
+  }
+
+  .btn-apple-rounded:hover {
+    transform: scale(1.02);
+  }
+
+  .btn-apple-squared {
+    @apply rounded-lg px-6 py-3 font-medium;
+    transition: all 0.2s ease;
+  }
+
+  .btn-apple-squared:hover {
+    opacity: 0.9;
+  }
+
+  /* Cards avec coins Apple */
+  .card-apple {
+    @apply rounded-2xl bg-card;
+    box-shadow:
+      0 2px 8px rgba(0, 0, 0, 0.04),
+      0 0 0 1px rgba(0, 0, 0, 0.05);
+  }
+
+  /* Espacements grid Apple (8px) */
+  .apple-spacing {
+    @apply space-y-8;
+  }
+
+  .apple-spacing-sm {
+    @apply space-y-4;
+  }
+
+  /* Glassmorphism bleu/rose pâle */
+  .glass-red {
+    background: linear-gradient(135deg,
+      hsl(213 27% 14% / 0.08) 0%,
+      hsl(213 27% 14% / 0.04) 100%);
+    backdrop-filter: blur(20px);
+    border: 1px solid hsl(213 27% 14% / 0.15);
+  }
+
+  .glass-pink {
+    background: linear-gradient(135deg,
+      hsl(330 60% 88% / 0.3) 0%,
+      hsl(330 60% 88% / 0.15) 100%);
+    backdrop-filter: blur(20px);
+    border: 1px solid hsl(330 60% 88% / 0.4);
+  }
+
+  /* Dividers subtils */
+  .divider-apple {
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      transparent,
+      hsl(var(--border)),
+      transparent
+    );
+  }
+
+  /* Hover glow effect */
+  .glow-on-hover {
+    transition: all 0.3s ease;
+  }
+
+  .glow-on-hover:hover {
+    box-shadow:
+      0 0 20px hsl(142 65% 50% / 0.3),
+      0 0 40px hsl(142 65% 50% / 0.1);
+  }
+}
