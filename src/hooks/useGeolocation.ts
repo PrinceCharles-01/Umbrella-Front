@@ -88,16 +88,29 @@ export const useGeolocation = (): UseGeolocationReturn => {
         console.log('✅ Localisation obtenue et sauvegardée');
       },
       (err) => {
-        setError(
-          err.code === 1
-            ? 'Vous avez refusé l\'accès à votre position'
-            : 'Impossible d\'obtenir votre position'
-        );
+        let errorMessage = 'Impossible d\'obtenir votre position';
+
+        switch (err.code) {
+          case 1: // PERMISSION_DENIED
+            errorMessage = 'Vous avez refusé l\'accès à votre position';
+            break;
+          case 2: // POSITION_UNAVAILABLE
+            errorMessage = 'Position indisponible. Vérifiez votre connexion ou activez le GPS.';
+            break;
+          case 3: // TIMEOUT
+            errorMessage = 'La demande de localisation a expiré';
+            break;
+        }
+
+        setError(errorMessage);
         setLoading(false);
-        console.error('❌ Erreur géolocalisation:', err);
+        console.error('❌ Erreur géolocalisation:', {
+          code: err.code,
+          message: err.message
+        });
       },
       {
-        enableHighAccuracy: true,
+        enableHighAccuracy: false, // Changé: évite l'erreur 403 de Google API
         timeout: 10000,
         maximumAge: 0,
       }
