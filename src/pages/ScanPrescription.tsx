@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Pill, Loader2 } from "lucide-react";
+import { ArrowLeft, Pill, Loader2, Camera, CheckCircle2, Sparkles } from "lucide-react";
 import PrescriptionScan from "@/components/PrescriptionScan";
 import MedicationVerification from "@/components/MedicationVerification";
 import MultiSearchResults from "@/components/MultiSearchResults";
@@ -99,17 +99,17 @@ const ScanPrescription = () => {
   const renderContent = () => {
     if (showResults) {
       return (
-        <div className="space-y-8">
-            <div className="flex items-center justify-between">
+        <div className="space-y-6 sm:space-y-8">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
               <div>
-                <h2 className="text-2xl font-bold text-foreground">
+                <h2 className="text-2xl sm:text-3xl font-bold text-foreground">
                   Résultats de la recherche
                 </h2>
-                <p className="text-muted-foreground">
+                <p className="text-sm sm:text-base text-muted-foreground mt-1">
                   Basé sur les médicaments de votre ordonnance.
                 </p>
               </div>
-              <Button variant="outline" onClick={handleBackToScan}>
+              <Button variant="outline" onClick={handleBackToScan} className="scale-hover w-full sm:w-auto">
                 <ArrowLeft className="h-4 w-4 mr-2" />
                 Nouveau scan
               </Button>
@@ -144,12 +144,16 @@ const ScanPrescription = () => {
 
     if (showVerification) {
       return (
-        <div className="space-y-8">
-            <div className="text-center space-y-4">
-              <h2 className="text-2xl md:text-3xl font-bold text-foreground">
+        <div className="space-y-6 sm:space-y-8">
+            <div className="text-center space-y-3 sm:space-y-4 px-4">
+              <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-emerald-50 border border-emerald-200 rounded-full mb-4">
+                <CheckCircle2 className="w-3 h-3 sm:w-4 sm:h-4 text-emerald-600" />
+                <span className="text-xs sm:text-sm font-medium text-emerald-700">Scan réussi</span>
+              </div>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground">
                 Vérification des médicaments
               </h2>
-              <p className="text-muted-foreground">
+              <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto">
                 Vérifiez et modifiez les informations détectées avant de continuer
               </p>
             </div>
@@ -165,12 +169,16 @@ const ScanPrescription = () => {
     }
 
     return (
-        <div className="space-y-8">
-            <div className="text-center space-y-4">
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground">
+        <div className="space-y-6 sm:space-y-8">
+            <div className="text-center space-y-3 sm:space-y-4 px-4">
+              <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-emerald-50 border border-emerald-200 rounded-full mb-4">
+                <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 text-emerald-600" />
+                <span className="text-xs sm:text-sm font-medium text-emerald-700">Scan intelligent avec IA</span>
+              </div>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground">
                 Scanner votre ordonnance
               </h2>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto">
                 Prenez une photo de votre ordonnance médicale et nous détecterons
                 automatiquement les médicaments prescrits.
               </p>
@@ -178,24 +186,29 @@ const ScanPrescription = () => {
 
             <PrescriptionScan onMedicationsDetected={handleMedicationsDetected} />
 
-            <div className="glass-card p-6 rounded-xl">
-              <h3 className="font-semibold text-lg mb-4">💡 Conseils pour un bon scan</h3>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li className="flex items-start gap-2">
-                  <span className="text-primary">•</span>
-                  Assurez-vous que l'ordonnance est bien éclairée
+            <div className="glass-card p-6 sm:p-8 rounded-2xl">
+              <h3 className="font-semibold text-base sm:text-lg mb-4 sm:mb-6 flex items-center gap-2">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 bg-emerald-100 rounded-lg flex items-center justify-center">
+                  <Camera className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600" />
+                </div>
+                Conseils pour un bon scan
+              </h3>
+              <ul className="space-y-3 sm:space-y-4 text-sm sm:text-base text-muted-foreground">
+                <li className="flex items-start gap-3">
+                  <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600 mt-0.5 flex-shrink-0" />
+                  <span>Assurez-vous que l'ordonnance est bien éclairée</span>
                 </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-primary">•</span>
-                  Prenez la photo de face, sans angle
+                <li className="flex items-start gap-3">
+                  <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600 mt-0.5 flex-shrink-0" />
+                  <span>Prenez la photo de face, sans angle</span>
                 </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-primary">•</span>
-                  L'écriture doit être lisible et nette
+                <li className="flex items-start gap-3">
+                  <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600 mt-0.5 flex-shrink-0" />
+                  <span>L'écriture doit être lisible et nette</span>
                 </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-primary">•</span>
-                  Évitez les reflets et les ombres
+                <li className="flex items-start gap-3">
+                  <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600 mt-0.5 flex-shrink-0" />
+                  <span>Évitez les reflets et les ombres</span>
                 </li>
               </ul>
             </div>
@@ -205,35 +218,49 @@ const ScanPrescription = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="glass-header sticky top-0 z-50 px-6 py-4">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="p-2 rounded-xl bg-primary">
-              <Pill className="h-6 w-6 text-primary-foreground" />
+      {/* ============================================
+          🎨 HEADER MODERNE & RESPONSIVE
+          ============================================ */}
+      <header className="header-modern">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
+          {/* Logo avec badge */}
+          <div className="flex items-center gap-2 sm:gap-3">
+            <div className="w-9 h-9 sm:w-10 sm:h-10 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-xl flex items-center justify-center shadow-lg shadow-emerald-500/20">
+              <Camera className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
             </div>
             <div>
-              <h1 className="text-xl font-semibold text-foreground">PharmFinder</h1>
-              <p className="text-sm text-muted-foreground">Scanner d'ordonnances</p>
+              <h1 className="text-base sm:text-lg font-bold text-foreground">PharmFinder</h1>
+              <p className="text-xs sm:text-sm text-muted-foreground hidden sm:block">Scanner d'ordonnances</p>
             </div>
           </div>
+
+          {/* Bouton retour responsive */}
           <Link to="/">
-            <Button variant="outline" size="sm">
-              <ArrowLeft className="h-4 w-4 mr-2" />
-              Retour
+            <Button variant="outline" size="sm" className="scale-hover">
+              <ArrowLeft className="h-3 h-3 sm:h-4 sm:w-4 sm:mr-2" />
+              <span className="hidden sm:inline">Retour</span>
             </Button>
           </Link>
         </div>
       </header>
 
-      {/* Main Content */}
-      <main className="max-w-4xl mx-auto px-6 py-12">
+      {/* ============================================
+          ✨ MAIN CONTENT RESPONSIVE
+          ============================================ */}
+      <main className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
         {renderContent()}
       </main>
 
-      <footer className="bg-background border-t border-border/50 mt-20">
-        <div className="max-w-7xl mx-auto px-6 py-8 text-center text-muted-foreground">
+      {/* ============================================
+          📄 FOOTER MODERNE & RESPONSIVE
+          ============================================ */}
+      <footer className="border-t border-border/50 mt-12 sm:mt-16 md:mt-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8 text-center text-muted-foreground text-xs sm:text-sm">
           <p>&copy; {new Date().getFullYear()} PharmFinder. Tous droits réservés.</p>
+          <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6 mt-4">
+            <Link to="/mentions-legales" className="hover:text-foreground transition-colors">Mentions Légales</Link>
+            <Link to="/register-pharmacy" className="hover:text-foreground transition-colors">Référencer ma pharmacie</Link>
+          </div>
         </div>
       </footer>
     </div>
