@@ -34,3 +34,7 @@ dist-ssr
 android/
 ios/
 .capacitor/
+
+# APK files (too large for git)
+public/downloads/*.apk
+public/downloads/*.aab
