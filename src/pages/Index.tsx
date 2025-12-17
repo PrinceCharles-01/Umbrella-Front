@@ -373,7 +373,7 @@ const Index = () => {
                   {/* Hero Title - Ultra Responsive */}
                   <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-foreground leading-tight mb-4 sm:mb-6 fade-in-up" style={{ animationDelay: '0.1s', letterSpacing: '-0.02em' }}>
                     Trouvez vos médicaments
-                    <span className="gradient-text-emerald"> en temps réel</span>
+                    <span className="gradient-text-emerald"> en un clic</span>
                   </h1>
 
                   {/* Hero Subtitle - Responsive */}
