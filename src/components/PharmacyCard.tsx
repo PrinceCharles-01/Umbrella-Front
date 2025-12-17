@@ -35,68 +35,74 @@ const PharmacyCard = ({
 
   return (
     <Collapsible className="w-full animate-fade-in">
-      <Card className="card-apple p-6 lift-hover">
+      <Card className="card-apple p-4 sm:p-6 lift-hover">
         <div className="flex flex-col gap-4">
-          <div className="flex items-start justify-between">
+          {/* Header - Vertical on mobile, horizontal on desktop */}
+          <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
             <div className="flex-1">
-              <h3 className="font-semibold text-foreground text-lg">
+              <h3 className="font-semibold text-foreground text-base sm:text-lg mb-2">
                 {pharmacy.nom}
               </h3>
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <MapPin className="h-4 w-4" />
-                <span>{pharmacy.adresse}</span>
+              <div className="flex items-start gap-2 text-xs sm:text-sm text-muted-foreground">
+                <MapPin className="h-4 w-4 flex-shrink-0 mt-0.5" />
+                <span className="break-words">{pharmacy.adresse}</span>
               </div>
             </div>
-            
-            <div className="text-right flex flex-col items-end gap-1">
+
+            {/* Distance et badge - horizontal sur mobile aussi */}
+            <div className="flex items-center justify-between sm:flex-col sm:items-end gap-2 sm:gap-1">
               <div className="text-sm font-medium text-foreground">
                 {pharmacy.distance_km ? `${pharmacy.distance_km.toFixed(1)} km` : ""}
               </div>
-              <Badge 
-                variant="outline" 
-                className={pharmacy.is_open 
-                  ? "bg-secondary/10 text-secondary border-secondary/20" 
+              <Badge
+                variant="outline"
+                className={`text-xs whitespace-nowrap ${pharmacy.is_open
+                  ? "bg-secondary/10 text-secondary border-secondary/20"
                   : "bg-destructive/10 text-destructive border-destructive/20"
-                }
+                }`}
               >
                 {pharmacy.is_open ? "Ouvert" : "Fermé"}
               </Badge>
             </div>
           </div>
-          
-          <div className="flex items-center justify-between text-sm text-muted-foreground">
-            <div className="flex items-center gap-4">
-                <div className="flex items-center gap-1">
-                    <Clock className="h-4 w-4" />
-                    <span>{pharmacy.opening_time && pharmacy.closing_time ? `${pharmacy.opening_time.slice(0, 5)} - ${pharmacy.closing_time.slice(0, 5)}` : "N/A"}</span>
+
+          {/* Info section - Vertical on mobile */}
+          <div className="flex flex-col gap-3">
+            {/* Info items - Stack vertically on mobile */}
+            <div className="flex flex-col sm:flex-row sm:flex-wrap gap-2 sm:gap-4 text-xs sm:text-sm text-muted-foreground">
+                <div className="flex items-center gap-2">
+                    <Clock className="h-4 w-4 flex-shrink-0" />
+                    <span className="truncate">{pharmacy.opening_time && pharmacy.closing_time ? `${pharmacy.opening_time.slice(0, 5)} - ${pharmacy.closing_time.slice(0, 5)}` : "N/A"}</span>
                 </div>
                 {pharmacy.telephone && (
-                    <div className="flex items-center gap-1">
-                        <Phone className="h-4 w-4" />
-                        <span>{pharmacy.telephone}</span>
+                    <div className="flex items-center gap-2">
+                        <Phone className="h-4 w-4 flex-shrink-0" />
+                        <span className="truncate">{pharmacy.telephone}</span>
                     </div>
                 )}
                 {pharmacy.note && parseFloat(pharmacy.note) > 0 && (
-                    <div className="flex items-center gap-1">
-                        <Star className="h-4 w-4 text-yellow-400 fill-current" />
+                    <div className="flex items-center gap-2">
+                        <Star className="h-4 w-4 text-yellow-400 fill-current flex-shrink-0" />
                         <span className="font-medium text-foreground">{parseFloat(pharmacy.note).toFixed(1)}</span>
                     </div>
                 )}
             </div>
-            <div className="flex gap-2">
-                <Button 
-                variant="ghost" 
+
+            {/* Buttons - Full width on mobile, side by side on desktop */}
+            <div className="flex flex-col sm:flex-row gap-2 w-full">
+                <Button
+                variant="ghost"
                 size="sm"
                 onClick={onViewDetails}
-                className="apple-press"
+                className="apple-press w-full sm:w-auto text-xs sm:text-sm"
                 >
                 Détails
                 </Button>
-                <Button 
-                variant="outline" 
+                <Button
+                variant="outline"
                 size="sm"
                 onClick={handleGetDirections}
-                className="apple-press hover:bg-secondary/10 hover:border-secondary/30"
+                className="apple-press hover:bg-secondary/10 hover:border-secondary/30 w-full sm:w-auto text-xs sm:text-sm"
                 >
                 <Navigation className="h-4 w-4 mr-2" />
                 Itinéraire
@@ -106,9 +112,9 @@ const PharmacyCard = ({
 
           {medicationsToDisplay.length > 0 && (
             <CollapsibleTrigger asChild>
-                <Button variant="link" className="w-full justify-center items-center gap-2 text-secondary">
-                    Voir les {medicationsToDisplay.length} médicaments disponibles
-                    <ChevronDown className="h-4 w-4 transition-transform duration-200 group-data-[state=open]:rotate-180" />
+                <Button variant="link" className="w-full justify-center items-center gap-2 text-secondary text-xs sm:text-sm">
+                    <span className="text-center">Voir les {medicationsToDisplay.length} médicament{medicationsToDisplay.length > 1 ? 's' : ''} disponible{medicationsToDisplay.length > 1 ? 's' : ''}</span>
+                    <ChevronDown className="h-4 w-4 flex-shrink-0 transition-transform duration-200 group-data-[state=open]:rotate-180" />
                 </Button>
             </CollapsibleTrigger>
           )}
