@@ -148,7 +148,7 @@ letter-spacing: 0.005em;
       <h1 className="text-7xl font-extrabold text-foreground leading-tight mb-6">
         Trouvez vos médicaments
         <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-emerald-600">
-          {" "}en temps réel
+          {" "}en un clic
         </span>
       </h1>
       <p className="text-xl text-muted-foreground mb-8 max-w-2xl">
