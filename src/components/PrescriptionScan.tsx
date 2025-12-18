@@ -16,6 +16,7 @@ import {
 import { buildApiUrl, API_ENDPOINTS } from "@/config/api.config";
 import { useToast } from "@/hooks/use-toast";
 import OCRTextValidation from "./OCRTextValidation";
+import { httpRequest } from "@/lib/http";
 
 interface DetectedMedication {
   id: number;
@@ -99,7 +100,7 @@ const PrescriptionScan = ({ onMedicationsDetected }: PrescriptionScanProps) => {
       formData.append('image', selectedFile);
 
       // Envoyer à l'API
-      const response = await fetch(buildApiUrl(API_ENDPOINTS.SCAN_PRESCRIPTION), {
+      const response = await httpRequest(buildApiUrl(API_ENDPOINTS.SCAN_PRESCRIPTION), {
         method: 'POST',
         body: formData,
       });
@@ -143,7 +144,7 @@ const PrescriptionScan = ({ onMedicationsDetected }: PrescriptionScanProps) => {
     setIsScanning(true);
     try {
       // Appeler un nouvel endpoint pour extraire les médicaments depuis le texte
-      const response = await fetch(buildApiUrl('/extract-medications-from-text/'), {
+      const response = await httpRequest(buildApiUrl('/extract-medications-from-text/'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

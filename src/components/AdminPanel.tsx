@@ -24,6 +24,7 @@ import {
   Home
 } from "lucide-react";
 import { API_BASE_URL } from "@/lib/api";
+import { httpRequest } from "@/lib/http";
 import AdminEditModal from "./AdminEditModal";
 import { Link } from "react-router-dom";
 
@@ -176,7 +177,7 @@ const AdminPanel = () => {
       const method = updatedPharmacy.id === null ? "POST" : "PUT";
       const url = updatedPharmacy.id === null ? `${API_BASE_URL}/pharmacies/` : `${API_BASE_URL}/pharmacies/${updatedPharmacy.id}/`;
       
-      const response = await fetch(url, {
+      const response = await httpRequest(url, {
         method,
         headers: {
           "Content-Type": "application/json",
@@ -205,7 +206,7 @@ const AdminPanel = () => {
       const method = updatedMedication.id === null ? "POST" : "PUT";
       const url = updatedMedication.id === null ? `${API_BASE_URL}/medications/` : `${API_BASE_URL}/medications/${updatedMedication.id}/`;
       
-      const response = await fetch(url, {
+      const response = await httpRequest(url, {
         method,
         headers: {
           "Content-Type": "application/json",
@@ -233,7 +234,7 @@ const AdminPanel = () => {
     if (!confirm("Êtes-vous sûr de vouloir supprimer cette pharmacie ?")) return;
     
     try {
-      const response = await fetch(`${API_BASE_URL}/pharmacies/${id}/`, {
+      const response = await httpRequest(`${API_BASE_URL}/pharmacies/${id}/`, {
         method: "DELETE",
       });
 
@@ -254,7 +255,7 @@ const AdminPanel = () => {
     if (!confirm("Êtes-vous sûr de vouloir supprimer ce médicament ?")) return;
     
     try {
-      const response = await fetch(`${API_BASE_URL}/medications/${id}/`, {
+      const response = await httpRequest(`${API_BASE_URL}/medications/${id}/`, {
         method: "DELETE",
       });
 
@@ -288,7 +289,7 @@ const AdminPanel = () => {
           stock: existingPharmacyMedication.stock + quantity,
           pharmacy_medication_price: existingPharmacyMedication.pharmacy_medication_price,
         };
-        response = await fetch(url, {
+        response = await httpRequest(url, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(body),
@@ -302,7 +303,7 @@ const AdminPanel = () => {
           stock: quantity,
           pharmacy_medication_price: medication ? medication.prix : 0,
         };
-        response = await fetch(url, {
+        response = await httpRequest(url, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(body),
@@ -315,7 +316,7 @@ const AdminPanel = () => {
       }
 
       // Refetch just the stocks for the updated pharmacy
-      const updatedStocksResponse = await fetch(`${API_BASE_URL}/pharmacies/${pharmacyId}/stocks/`);
+      const updatedStocksResponse = await httpRequest(`${API_BASE_URL}/pharmacies/${pharmacyId}/stocks/`);
       const updatedStocks = await updatedStocksResponse.json();
 
       setPharmacyMedications(prev => ({

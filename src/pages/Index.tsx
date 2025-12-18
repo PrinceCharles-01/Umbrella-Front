@@ -994,7 +994,7 @@ const Index = () => {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               {/* Google Play Button */}
               <a
-                href="https://github.com/PrinceCharles-01/Umbrella-Front/releases/download/v1.0.0/pharmfinder-release.apk"
+                href="https://github.com/PrinceCharles-01/Umbrella-Front/releases/download/v1.0.0/pharmafinder-release.apk"
                 download
                 className="group inline-flex items-center gap-3 px-6 py-4 bg-black hover:bg-gray-900 text-white rounded-xl transition-all duration-300 apple-press w-full sm:w-auto"
               >

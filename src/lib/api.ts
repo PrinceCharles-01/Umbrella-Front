@@ -1,5 +1,6 @@
 import { CartItem } from "@/types";
 import { buildApiUrl, API_ENDPOINTS, ERROR_MESSAGES, API_CONFIG } from "@/config/api.config";
+import { httpRequest } from "@/lib/http";
 
 // Export pour compatibilité avec le code existant
 export const API_BASE_URL = API_CONFIG.BASE_URL;
@@ -48,7 +49,7 @@ export interface ApiPharmacy {
  */
 export const getMedications = async (): Promise<ApiMedication[]> => {
   try {
-    const response = await fetch(buildApiUrl(API_ENDPOINTS.MEDICATIONS));
+    const response = await httpRequest(buildApiUrl(API_ENDPOINTS.MEDICATIONS));
 
     if (!response.ok) {
       if (response.status === 404) {
@@ -82,7 +83,7 @@ export const getMedications = async (): Promise<ApiMedication[]> => {
  */
 export const getMedicationById = async (id: number): Promise<ApiMedication> => {
   try {
-    const response = await fetch(buildApiUrl(API_ENDPOINTS.MEDICATION_BY_ID(id)));
+    const response = await httpRequest(buildApiUrl(API_ENDPOINTS.MEDICATION_BY_ID(id)));
 
     if (!response.ok) {
       if (response.status === 404) {
@@ -114,7 +115,7 @@ export const getPharmacies = async ({ lat, lon, medicationId }: { lat?: number; 
     if (medicationId) params.append('medication_id', medicationId.toString());
 
     const url = `${buildApiUrl(API_ENDPOINTS.PHARMACIES)}?${params.toString()}`;
-    const response = await fetch(url);
+    const response = await httpRequest(url);
 
     if (!response.ok) {
       if (response.status === 404) {
@@ -152,7 +153,7 @@ export const findPharmaciesByMedications = async (medicationIds: number[]): Prom
       throw new Error('Veuillez sélectionner au moins un médicament');
     }
 
-    const response = await fetch(buildApiUrl(API_ENDPOINTS.FIND_BY_MEDICATIONS), {
+    const response = await httpRequest(buildApiUrl(API_ENDPOINTS.FIND_BY_MEDICATIONS), {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -203,7 +204,7 @@ export const createPharmacy = async (pharmacyData: {
   assurances_acceptees?: string;
 }): Promise<ApiPharmacy> => {
   try {
-    const response = await fetch(buildApiUrl(API_ENDPOINTS.PHARMACIES), {
+    const response = await httpRequest(buildApiUrl(API_ENDPOINTS.PHARMACIES), {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -263,7 +264,7 @@ export const createOrder = async (cartItems: CartItem[]): Promise<any> => {
       })),
     };
 
-    const response = await fetch(buildApiUrl(API_ENDPOINTS.ORDERS), {
+    const response = await httpRequest(buildApiUrl(API_ENDPOINTS.ORDERS), {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
