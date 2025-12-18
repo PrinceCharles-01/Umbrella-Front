@@ -1,73 +1,185 @@
-# Welcome to your Lovable project
+# PharmFinder 💊
 
-## Project info
+Application mobile et web pour trouver des médicaments dans les pharmacies à proximité.
 
-**URL**: https://lovable.dev/projects/9f00f657-de16-46c4-ac18-8821573005e3
+## 🚀 Fonctionnalités
 
-## How can I edit this code?
+- 🔍 **Recherche de médicaments** - Trouvez rapidement les pharmacies qui ont vos médicaments en stock
+- 📍 **Géolocalisation** - Pharmacies triées par distance depuis votre position
+- 📱 **Application mobile native** - Interface optimisée pour iOS et Android via Capacitor
+- 🌐 **Version web** - Accessible depuis n'importe quel navigateur
+- 📸 **Scan d'ordonnance** - OCR pour extraire automatiquement les médicaments
+- 🛒 **Recherche multiple** - Recherchez plusieurs médicaments simultanément
+- 💳 **Filtres avancés** - Par distance, prix, assurance, note
 
-There are several ways of editing your application.
+## 📦 Technologies utilisées
 
-**Use Lovable**
+### Frontend
+- **React 18** + **TypeScript**
+- **Vite** - Build tool ultra-rapide
+- **Tailwind CSS** - Styling moderne
+- **shadcn/ui** - Composants UI élégants
+- **TanStack Query** - Gestion du state et du cache
+- **React Router** - Navigation
+- **Capacitor 8** - Wrapper mobile natif
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/9f00f657-de16-46c4-ac18-8821573005e3) and start prompting.
+### Backend
+- **Django 5.2** + **Django REST Framework**
+- **PostgreSQL** (production) / **SQLite** (dev)
+- **OpenAI Vision API** - OCR pour les ordonnances
+- **OpenRouteService** - Calcul d'itinéraires
 
-Changes made via Lovable will be committed automatically to this repo.
+## 🛠️ Installation
 
-**Use your preferred IDE**
+### Prérequis
+- Node.js 18+ et npm
+- Python 3.11+
+- Git
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### Installation du Frontend
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+```bash
+# Cloner le repository
+git clone https://github.com/PrinceCharles-01/Umbrella-Front.git
+cd Umbrella-Front/front-1
 
-Follow these steps:
+# Installer les dépendances
+npm install
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Démarrer le serveur de développement
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+Le site sera accessible sur `http://localhost:8080`
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### Installation du Backend
 
-**Use GitHub Codespaces**
+```bash
+cd ../django-backend
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+# Créer un environnement virtuel
+python -m venv venv
+source venv/bin/activate  # Sur Windows: venv\Scripts\activate
 
-## What technologies are used for this project?
+# Installer les dépendances
+pip install -r requirements.txt
 
-This project is built with:
+# Configurer les variables d'environnement
+cp .env.example .env
+# Éditer .env avec vos clés API
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+# Migrations de la base de données
+python manage.py migrate
 
-## How can I deploy this project?
+# Démarrer le serveur
+python manage.py runserver 3001
+```
 
-Simply open [Lovable](https://lovable.dev/projects/9f00f657-de16-46c4-ac18-8821573005e3) and click on Share -> Publish.
+## 📱 Build Mobile
 
-## Can I connect a custom domain to my Lovable project?
+### Android
 
-Yes, you can!
+```bash
+cd front-1
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+# Build de l'application et sync avec Capacitor
+npm run mobile:build:android
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+# L'APK de debug sera généré dans:
+# android/app/build/outputs/apk/debug/app-debug.apk
+```
+
+### iOS
+
+```bash
+npm run mobile:build:ios
+```
+
+## 🌍 Déploiement
+
+### Frontend (Vercel)
+Le frontend est automatiquement déployé sur Vercel à chaque push sur `main`.
+
+**URL de production**: https://umbrellafront.vercel.app
+
+### Backend (Railway)
+Le backend Django est hébergé sur Railway.
+
+**URL de production**: https://web-production-ef9dc.up.railway.app
+
+## 📱 Télécharger l'application
+
+### Android
+[Télécharger l'APK](https://github.com/PrinceCharles-01/Umbrella-Front/releases/download/v1.0.0/pharmafinder-release.apk)
+
+### iOS
+Bientôt disponible sur l'App Store
+
+## 🔧 Structure du projet
+
+```
+Umbrella-1/
+├── front-1/                    # Application React
+│   ├── src/
+│   │   ├── pages/             # Pages principales
+│   │   │   ├── Index.tsx      # Version web
+│   │   │   └── IndexMobile.tsx # Version mobile
+│   │   ├── components/        # Composants réutilisables
+│   │   ├── lib/              # Utilitaires et API
+│   │   │   ├── api.ts        # Appels API
+│   │   │   └── http.ts       # Wrapper HTTP (Capacitor)
+│   │   └── hooks/            # React hooks
+│   ├── android/              # Code natif Android
+│   └── ios/                  # Code natif iOS
+│
+└── django-backend/            # API Django REST
+    ├── api/                  # Application principale
+    ├── orders/               # Gestion des commandes
+    └── umbrella_api/         # Configuration Django
+```
+
+## 🎯 Scripts disponibles
+
+### Frontend
+
+```bash
+npm run dev              # Serveur de développement
+npm run build            # Build de production
+npm run preview          # Aperçu du build
+
+# Scripts Capacitor
+npm run cap:sync         # Synchroniser le code web avec mobile
+npm run cap:open:android # Ouvrir dans Android Studio
+npm run cap:open:ios     # Ouvrir dans Xcode
+npm run mobile:build     # Build + sync
+```
+
+### Backend
+
+```bash
+python manage.py runserver     # Serveur de développement
+python manage.py migrate       # Appliquer les migrations
+python manage.py createsuperuser # Créer un admin
+python manage.py test         # Tests unitaires
+```
+
+## 🤝 Contribution
+
+Les contributions sont les bienvenues ! N'hésitez pas à ouvrir une issue ou une pull request.
+
+## 📄 Licence
+
+Ce projet est sous licence MIT.
+
+## 👨‍💻 Auteur
+
+Développé par Prince Charles
+
+- GitHub: [@PrinceCharles-01](https://github.com/PrinceCharles-01)
+- Frontend: [Umbrella-Front](https://github.com/PrinceCharles-01/Umbrella-Front)
+
+## 🙏 Remerciements
+
+- OpenAI pour l'API Vision (OCR)
+- OpenRouteService pour le calcul d'itinéraires
+- La communauté open-source pour tous les packages utilisés
