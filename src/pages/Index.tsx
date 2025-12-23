@@ -762,10 +762,10 @@ const Index = () => {
                ============================================ */}
             <section className="px-4 sm:px-6 py-16 sm:py-20 md:py-24 bg-gradient-to-br from-gray-900 to-gray-800 text-white">
               <div className="max-w-4xl mx-auto text-center">
-                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 px-4">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 px-4 text-white">
                   Prêt à trouver vos médicaments ?
                 </h2>
-                <p className="text-base sm:text-lg text-gray-300 mb-8 sm:mb-10 px-4">
+                <p className="text-base sm:text-lg text-white font-bold mb-8 sm:mb-10 px-4">
                   Rejoignez des milliers d'utilisateurs qui gagnent du temps chaque jour
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center px-4">
